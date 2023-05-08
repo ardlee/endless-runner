@@ -5,10 +5,13 @@ class Menu extends Phaser.Scene {
 
     preload() {
         //load assets
+
+        this.load.image('player', './assets/Player (1).png');
     }
 
 
     create() {
+        
         //menu text configuration
         let menuConfig = {
             fontFamily: 'Slab serif',
@@ -36,7 +39,12 @@ class Menu extends Phaser.Scene {
         }
 
         keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
-        // keyI = this.input.keyboard.addkey(Phaser.Input.Keyboard.KeyCodes.I);
+        keyESC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
+        keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+        keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+        keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+        keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        keyI = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
 
         //menu text and colors
         this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'The Game', menuConfig).setOrigin(0.5);
