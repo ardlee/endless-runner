@@ -3,9 +3,12 @@ class Play extends Phaser.Scene {
         super("playScene");
     }
 
+    
     preload() {
         //load assets
         this.load.image('player', './assets/Player (1).png');
+        // this.load.image('enemy', './assets/Enemy.png');
+        
     }
 
 
@@ -17,6 +20,10 @@ class Play extends Phaser.Scene {
         this.add.rectangle(0, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0 ,0);
         this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0 ,0);
         // this.add.image(0, 0, 'player').setOrigin(0, 0);
+        this.add.image(0, 0, 'enemy').setOrigin(0, 0);
+
+        // this.player = this.physics.add.image(200, 150, 'player').setVelocity(SPEED, 0);
+
 
         this.player = new Player(this, game.config.width/2, game.config.height - borderUISize - borderPadding, 'player').setOrigin(0.5, 1);
 
@@ -43,16 +50,21 @@ class Play extends Phaser.Scene {
         this.add.text(game.config.width/2, game.config.height/2, 'Play', menuConfig2).setOrigin(0.5);
         
     }
-
-
+    
+    
+    
+    
     update() {
+        // this.pointerMove ( this.input.activePointer);
+        // velocityFromRotation(this.rotation, SPEED, this.player.body.velocity);
         if (Phaser.Input.Keyboard.JustDown(keyESC)) {
-            //this.play.audio   
+            this.sound.play('synth'); 
             this.scene.start('menuScene');
         }
 
         if (!this.gameOver){
             this.player.update();
+            //this.enemy.update();
         }
 
         // add listener for the 'keydown' event
@@ -65,4 +77,16 @@ class Play extends Phaser.Scene {
   
         
     }
+    // pointerMove (pointer){
+    //     var angleToPointer = Phaser.Math.Angle.Between(this.player.x, this.player.y, pointer.worldX, pointer.WorldY);
+    //     var angleDelta = Phaser.Math.Angle.Wrap(angleToPointer - this.player.rotation);
+          
+    //     if (Phaser.Math.Fuzzy.Equal(angleDelta, 0, TOLERANCE)) {
+    //         this.player.rotation = angleToPointer;
+    //         this.player.setAngularVelocity(0);
+    //     } else {
+    //         this.player.setAngularVelocity(Math.sign(angleDelta) * ROTATION_SPEED_DEGREES);
+    //     }
+    // }
+   
 }

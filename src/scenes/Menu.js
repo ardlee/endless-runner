@@ -5,8 +5,10 @@ class Menu extends Phaser.Scene {
 
     preload() {
         //load assets
-
+        this.load.audio('blipSelect', './assets/blipSelect.wav')
+        this.load.audio('synth', './assets/synth.wav')
         this.load.image('player', './assets/Player (1).png');
+        this.load.image('enemy', './assets/enemy.png');
     }
 
 
@@ -48,7 +50,7 @@ class Menu extends Phaser.Scene {
 
         //menu text and colors
         this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'The Game', menuConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2, 'Instructions', menuConfig2).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2, 'Press (I) for instructions', menuConfig2).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'Press (ENTER) to play', menuConfig2).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2 + borderUISize+5 + borderPadding*2, "Made by Arthur Lee ", menuConfig2).setOrigin(0.5);
     }
@@ -63,14 +65,14 @@ class Menu extends Phaser.Scene {
             //     gameTimer: 60000
             // }
 
-            //this.play.audio   
+            this.sound.play('blipSelect');   
             this.scene.start('playScene');
         }
 
-        // if (Phaser.Input.Keyboard.JustDown(keyI)) {
-        //     //this.play.audio
-        //     this.scene.start('instructionScene');
-        // }
+        if (Phaser.Input.Keyboard.JustDown(keyI)) {
+            this.sound.play('blipSelect'); 
+            this.scene.start('instructionScene');
+        }
     }
 }
 

@@ -7,6 +7,7 @@ class Player extends Phaser.GameObjects.Sprite {
         this.isFiring = false;      // tracks if player is firing
                                     // when the player fires they must wait a half second to fire again
         this.moveSpeed = 9;         // pixels per frame
+        
 
         // this.sfxFire = scene.sound.add('sfx_fire'); // add rocket sfx
 
@@ -17,7 +18,7 @@ class Player extends Phaser.GameObjects.Sprite {
             if (keyA.isDown && this.x >= borderUISize + this.width) {
                 this.x -= this.moveSpeed;
             }
-            else if (keyD.isDown && this.x <= game.config.width - borderUISize - this.width) {
+            if (keyD.isDown && this.x <= game.config.width - borderUISize - this.width) {
                 this.x += this.moveSpeed;
             }
         // }
@@ -25,7 +26,7 @@ class Player extends Phaser.GameObjects.Sprite {
             if (keyW.isDown && this.y >= borderUISize + this.width){
                     this.y -= this.moveSpeed;
                 }
-            else if (keyS.isDown && this.y <= 670){
+            if (keyS.isDown && this.y <= 670){
                 this.y += this.moveSpeed;
             }
         // }
@@ -46,11 +47,27 @@ class Player extends Phaser.GameObjects.Sprite {
         //     this.isFiring = false;
         //     this.y = game.config.height - borderUISize - borderPadding;
         // }
+
+        // pointerMove(this.input.activePointer);
+        // velocityFromRotation(ship.rotation, SPEED, ship.body.velocity);
     }
 
     reset() {
         this.isFiring = false;
         this.y = game.config.height - borderUISize - borderPadding;
     }
+    
 
 }
+
+// function pointerMove (pointer){
+//     var angleToPointer = Phaser.Math.Angle.Between(player.x, player.y, pointer,worldX, pointer.WorldY);
+//     var angleDelta = Phaser.Math.Angle.Wrap(angleToPointer - player.rotation);
+      
+//     if (Phaser.Math.Fuzzy.Equal(angleDelta, 0, TOLERANCE)) {
+//         player.rotation = angleToPointer;
+//         player.setAngularVelocity(0);
+//     } else {
+//         player.setAngularVelocity(Math.sign(angleDelta) * ROTATION_SPEED_DEGREES);
+//     }
+// }
