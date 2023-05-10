@@ -29,6 +29,22 @@ class Player extends Phaser.GameObjects.Sprite {
             if (keyS.isDown && this.y <= 670){
                 this.y += this.moveSpeed;
             }
+
+            // if (keyA.isDown) {
+            //     player.setVelocityX(-200);
+            // } else if (keyD.isDown) {
+            //     player.setVelocityX(200);
+            // } else {
+            //     player.setVelocityX(0);
+            // }
+        
+            // if (keyW.isDown) {
+            //     player.setVelocityY(-200);
+            // } else if (keyS.isDown) {
+            //     player.setVelocityY(200);
+            // } else {
+            //     player.setVelocityY(0);
+            // }
         // }
         
         
@@ -48,8 +64,7 @@ class Player extends Phaser.GameObjects.Sprite {
         //     this.y = game.config.height - borderUISize - borderPadding;
         // }
 
-        // pointerMove(this.input.activePointer);
-        // velocityFromRotation(ship.rotation, SPEED, ship.body.velocity);
+ 
     }
 
     reset() {
@@ -60,14 +75,22 @@ class Player extends Phaser.GameObjects.Sprite {
 
 }
 
-// function pointerMove (pointer){
-//     var angleToPointer = Phaser.Math.Angle.Between(player.x, player.y, pointer,worldX, pointer.WorldY);
-//     var angleDelta = Phaser.Math.Angle.Wrap(angleToPointer - player.rotation);
-      
-//     if (Phaser.Math.Fuzzy.Equal(angleDelta, 0, TOLERANCE)) {
-//         player.rotation = angleToPointer;
-//         player.setAngularVelocity(0);
-//     } else {
-//         player.setAngularVelocity(Math.sign(angleDelta) * ROTATION_SPEED_DEGREES);
+// class PlayerBullet extends Phaser.GameObjects.Sprite {
+//     constructor(scene, x, y, texture, frame) {
+//         super(scene, x, y, texture, frame);
+//         scene.add.existing(this);
+//     }
+
+//     update() {
+
+//         let xDist = this.game.input.mousePointer.x - this.x;
+//         let yDist = this.game.input.mousePointer.y - this.y;
+//         let angle = Math.atan(yDist/xDist);
+
+//         this.projectile_sprite.setVelocityX(yDist);
+//         this.projectile_sprite.setVelocityY(xDist);
+
+//         this.physics.moveTo(this.PlayerBullet, this.game.input.mousePointer.x,
+//             this.game.input.mousePointer.y);        //set for one instance, dont keep updating mouse location
 //     }
 // }

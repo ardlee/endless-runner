@@ -13,6 +13,8 @@ class Menu extends Phaser.Scene {
 
 
     create() {
+
+        this.input.setDefaultCursor('url(assets/Target.cur), pointer');
         
         //menu text configuration
         let menuConfig = {
