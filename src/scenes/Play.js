@@ -9,8 +9,8 @@ class Play extends Phaser.Scene {
     preload() {
         //load assets
         this.load.image('player', './assets/Player (1).png');
-        this.load.spritesheet('playerMove', './assets/Player (1) (2).png', {frameWidth: 32, frameHeight: 32, startFrame: 1, endFrame: 2 });
-        this.load.spritesheet('enemyMove', './assets/enemy (1).png', {frameWidth: 32, frameHeight: 32, startFrame: 1, endFrame: 3 });
+        this.load.spritesheet('playerMove', './assets/Player (1) (2).png', {frameWidth: 32, frameHeight: 32, startFrame: 0, endFrame: 1 });
+        this.load.spritesheet('enemyMove', './assets/enemy (1).png', {frameWidth: 32, frameHeight: 32, startFrame: 0, endFrame: 2 });
         // this.load.image('enemy', './assets/Enemy.png');
         
     }
@@ -47,7 +47,7 @@ class Play extends Phaser.Scene {
         this.scoreText = this.add.text( 550, 50, 'score: 0', menuConfig3).setOrigin(0.5);
         this.gameOver = false;
 
-
+        //  this.timeText = this.add.text( 300, 50, 'Time Survived: 0', menuConfig3).setOrigin(0.5);
         this.bulletAmount = 0;
         this.bulletText = this.add.text(80, 50, 'Bullets Fired:', menuConfig3).setOrigin(0.5);
         
@@ -57,18 +57,36 @@ class Play extends Phaser.Scene {
         // this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0 ,0);
         // this.add.image(0, 0, 'player').setOrigin(0, 0);
         // this.add.image(0, 0, 'enemy').setOrigin(0, 0);
-        this.enemy1 = this.physics.add.existing(new Enemy(this, 700, 300, 'enemy').setOrigin(0.5, 1));
+
+        this.anims.create({
+            key: "eMove",
+            frameRate: 9,
+            frames: this.anims.generateFrameNumbers("enemyMove", { start: 0, end: 2 }),
+            repeat: -1
+        });
+        this.enemy1 = this.physics.add.existing(new Enemy(this, 700, 300, 'enemyMove').setOrigin(0.5, 1));
+        this.enemy1.play('eMove');
         this.enemy1.angle = 90;
         this.enemy2 = this.physics.add.existing(new Enemy2(this, 0, 40, 'enemy').setOrigin(0.5, 1));
+        this.enemy2.play('eMove');
         this.enemy2.angle = 270;
         this.enemy3 = this.physics.add.existing(new Enemy3(this, 200, 0, 'enemy').setOrigin(0.5, 1));
+        this.enemy3.play('eMove');
         this.enemy4 = this.physics.add.existing(new Enemy4(this, 500, 800, 'enemy').setOrigin(0.5,1));
+        this.enemy4.play('eMove');
         this.enemy4.angle = 180;
-        // this.player = this.physics.add.image(200, 150, 'player').setVelocity(SPEED, 0);
+     
 
 
+        this.anims.create({
+            key: "pMove",
+            frameRate: 5,
+            frames: this.anims.generateFrameNumbers("playerMove", { start: 0, end: 1 }),
+            repeat: -1
+        });
         // this.player = new Player(this, game.config.width/2, game.config.height - borderUISize - borderPadding, 'player').setOrigin(0.5, 1);
-        this.gun = this.physics.add.image(300, 400, 'player');
+        this.gun = this.physics.add.sprite(300, 400, 'player');
+        this.gun.play('pMove');
     
         this.gun.moveSpeed = 9;
         // this.player= this.physics.add.image(400, 300, 'player');
@@ -126,10 +144,16 @@ class Play extends Phaser.Scene {
     
     update() {
 
-       
+        //timer
+    //    var surviveTime = time * 0.001;
+    //    this.timeText.text = ('Time Survived:' + Math.round(surviveTime));
+
+
+
         if (Phaser.Input.Keyboard.JustDown(keyESC)) {
             this.sound.play('synth'); 
             this.scene.start('menuScene');
+            // time = 0;
         }
 
 
@@ -237,6 +261,7 @@ class Play extends Phaser.Scene {
 
 
         if( this.gameOver){
+            // time = 0;
             this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', menuConfig2).setOrigin(0.5);
             this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (esc) to go back', menuConfig2).setOrigin(0.5);
             this.enemy1.destroy();
