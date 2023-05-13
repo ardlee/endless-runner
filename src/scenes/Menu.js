@@ -7,7 +7,8 @@ class Menu extends Phaser.Scene {
         //load assets
         this.load.audio('blipSelect', './assets/blipSelect.wav')
         this.load.audio('synth', './assets/synth.wav')
-        this.load.image('player', './assets/Player (1).png');
+        this.load.image('bullet', './assets/bullet (1).png')
+        this.load.image('player', './assets/Player (1) (1).png');
         this.load.image('enemy', './assets/enemy.png');
     }
 
@@ -42,6 +43,19 @@ class Menu extends Phaser.Scene {
             fixedWidth: 0,
         }
 
+        let menuConfig3 = {
+            fontFamily: 'Courier',
+            fontSize: '16px',
+            backgroundColor: '#3352F',
+            color: '#FFFFFF',
+            allign: 'center',
+            padding: {
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 0,
+        }
+
         keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
         keyESC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
         keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
@@ -52,7 +66,7 @@ class Menu extends Phaser.Scene {
 
         //menu text and colors
         this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'The Game', menuConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2, 'Press (I) for instructions', menuConfig2).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2, 'Press (I) for instructions', menuConfig3).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'Press (ENTER) to play', menuConfig2).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2 + borderUISize+5 + borderPadding*2, "Made by Arthur Lee ", menuConfig2).setOrigin(0.5);
     }
