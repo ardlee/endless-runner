@@ -9,6 +9,7 @@ class Play extends Phaser.Scene {
     preload() {
         //load assets
         this.load.image('player', './assets/Player (1).png');
+        this.load.image('background', './assets/background (2).png');
         this.load.spritesheet('playerMove', './assets/Player (1) (2).png', {frameWidth: 32, frameHeight: 32, startFrame: 0, endFrame: 1 });
         this.load.spritesheet('enemyMove', './assets/enemy (1).png', {frameWidth: 32, frameHeight: 32, startFrame: 0, endFrame: 2 });
         // this.load.image('enemy', './assets/Enemy.png');
@@ -17,10 +18,15 @@ class Play extends Phaser.Scene {
     
 
     create() {
+        this.music = this.sound.add('music');
+        
+        this.music.loop = true;
+        this.music.play();
+
         let menuConfig2 = {
             fontFamily: 'Courier',
             fontSize: '16px',
-            backgroundColor: '#3352F',
+            backgroundColor: '#b88b42',
             color: '#843605',
             allign: 'center',
             padding: {
@@ -32,7 +38,7 @@ class Play extends Phaser.Scene {
         let menuConfig3 = {
             fontFamily: 'Courier',
             fontSize: '16px',
-            backgroundColor: '#3352F',
+            backgroundColor: '#b88b42',
             color: '#FFFFFF',
             allign: 'center',
             padding: {
@@ -42,6 +48,7 @@ class Play extends Phaser.Scene {
             fixedWidth: 0,
         }
 
+        this.background = this.add.tileSprite(0, 0, 640, 730, 'background').setOrigin(0, 0);
 
         this.score = 0;
         this.scoreText = this.add.text( 550, 50, 'score: 0', menuConfig3).setOrigin(0.5);
@@ -134,8 +141,6 @@ class Play extends Phaser.Scene {
 
 
         
-        this.add.text(game.config.width/2, game.config.height/2, 'Play', menuConfig2).setOrigin(0.5);
-
         
     }
     
@@ -153,7 +158,8 @@ class Play extends Phaser.Scene {
         if (Phaser.Input.Keyboard.JustDown(keyESC)) {
             this.sound.play('synth'); 
             this.scene.start('menuScene');
-            // time = 0;
+            this.music.stop(); 
+            // // time = 0;
         }
 
 
@@ -211,6 +217,7 @@ class Play extends Phaser.Scene {
 
 
         if (!this.gameOver){
+            this.background.tilePositionY -= 2;
             if (keyA.isDown && this.gun.x >= 30) {
                 this.gun.x -= this.gun.moveSpeed;
             }
@@ -245,7 +252,7 @@ class Play extends Phaser.Scene {
         let menuConfig2 = {
             fontFamily: 'Courier',
             fontSize: '16px',
-            backgroundColor: '#3352F',
+            backgroundColor: '#b88b42',
             color: '#843605',
             allign: 'center',
             padding: {
@@ -301,7 +308,7 @@ class Play extends Phaser.Scene {
     }
     enemyHit(bullet, enemy) {
         this.score += 10;
-        // bullet.destroy();
+        this.sound.play('explode');
         enemy.visble=true;
         
     }

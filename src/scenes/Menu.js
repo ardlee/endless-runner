@@ -10,19 +10,35 @@ class Menu extends Phaser.Scene {
         this.load.image('bullet', './assets/bullet (1).png')
         this.load.image('player', './assets/Player (1) (1).png');
         this.load.image('enemy', './assets/enemy.png');
+        this.load.audio('explode', './assets/explosion.wav')
+        this.load.audio('music', './assets/hero-80s-127027.mp3');
     }
 
 
     create() {
-
-        this.input.setDefaultCursor('url(assets/Target.cur), pointer');
         
+        this.input.setDefaultCursor('url(assets/Target.cur), pointer');
+        // this.music = this.sound.add('music');
+        // this.music.stop();
+        // var musicConfig = {
+        //     mute: false,
+        //     volume: 0.2,
+        //     rate: 1,
+        //     detune: 0,
+        //     seek: 0,
+        //     loop: true,
+        //     delay: 0
+        // }
+        // this.music.play(musicConfig);
+        
+        
+
         //menu text configuration
         let menuConfig = {
-            fontFamily: 'Slab serif',
-            fontSize: '100px',
+            fontFamily: 'Righteous',
+            fontSize: '90px',
             backgroundColor: '#000000',
-            color: '#4D080B',
+            color: '#b88b42',
             allign: 'center',
             padding: {
                 top: 5,
@@ -34,7 +50,7 @@ class Menu extends Phaser.Scene {
             fontFamily: 'Courier',
             fontSize: '16px',
             backgroundColor: '#3352F',
-            color: '#843605',
+            color: '#b88b42',
             allign: 'center',
             padding: {
                 top: 5,
@@ -65,8 +81,8 @@ class Menu extends Phaser.Scene {
         keyI = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
 
         //menu text and colors
-        this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'The Game', menuConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2, 'Press (I) for instructions', menuConfig3).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'Cookie Shooter', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2, 'Press (I) for instructions and credits', menuConfig3).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'Press (ENTER) to play', menuConfig2).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2 + borderUISize+5 + borderPadding*2, "Made by Arthur Lee ", menuConfig2).setOrigin(0.5);
     }

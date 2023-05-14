@@ -1,8 +1,16 @@
 /*
 Arthur Lee
-Endless Runner
+Endless Runner, Cookie shooter
 
-https://plnkr.co/edit/nBoIiwjEA5M93OUawayX?p=preview&preview
+This is an arcade shooter type game where the player must dodge enemies to stay alive. I called it cookie shooter
+because when making the background of a rocky terrain it looked like a cookie.
+
+I am proud of it because the player rotates according to the mouse pointer and made the mouse cursor an aimer.
+Although it sounds simple it was much tougher than I expected, even though I expected it to be difficult.
+
+Music: Hero 80s by AlexiAction
+
+
 */
 
 
